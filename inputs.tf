@@ -71,6 +71,9 @@ variable "developer_users" {
 }
 
 variable "cluster_version" {}
+variable "write_kubeconfig" {
+  default = "true"
+}
 
 variable "asg_instance_types" {
   type        = list(string)
