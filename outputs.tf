@@ -23,34 +23,11 @@ output "node_groups" {
   value       = module.eks-cluster.node_groups
 }
 
-output "cluster_oidc_issuer_url" {
-  description = "Outputs from cluster_oidc_issuer_url"
-  value       = module.eks-cluster.cluster_oidc_issuer_url
-}
-/*
-output "worker_autoscaling_policy_arn" {
-  description = "Outputs from worker_autoscaling_policy_arn"
-  value       = module.eks-cluster.worker_autoscaling_policy_arn
-}
-*/
-
 output "worker_iam_role_name" {
   description = "Outputs from worker_iam_role_name"
-  value       = module.eks-cluster.worker_iam_role_name
+  value       = module.eks-cluster.aws_iam_role.workers
 }
 
-output "worker_iam_role_arn" {
-  description = "Outputs from worker_iam_role_arn"
-  value       = module.eks-cluster.worker_iam_role_arn
-}
-
-
-/*
-output "aws_s3_bucket_name" {
-  description = "Outputs from aws_s3_bucket resource"
-  value       = aws_s3_bucket.backend_bucket.id
-}
-*/
 output "private_subnet_output" {
   description = "Outputs from VPC Module with private_subnets"
   value = module.vpc.aws_subnet.private
@@ -69,10 +46,3 @@ output "cluster_id" {
   description = "Outputs from cluster_id"
   value       = module.eks-cluster.cluster_id
 }
-/*
-output "aws_route53_zone_id" {
-  description = "Outputs from aws_route53_zone_id"
-#  value       = data.aws_route53_zone.base_domain
-  value = aws_route53_record.eks_domain.zone_id
-}
-*/
