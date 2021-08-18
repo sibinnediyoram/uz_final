@@ -1,11 +1,11 @@
 output "cluster_endpoint" {
   description = "Endpoint for EKS control plane."
-  value       = module.eks-cluster.cluster_endpoint
+  value       = module.eks-cluster.aws_eks_cluster.this.endpoint
 }
 
 output "cluster_security_group_id" {
   description = "Security group ids attached to the cluster control plane."
-  value       = module.eks-cluster.cluster_security_group_id
+  value       = module.eks-cluster.aws_security_group.cluster
 }
 
 output "kubectl_config" {
@@ -17,11 +17,6 @@ output "config_map_aws_auth" {
   description = "A kubernetes configuration to authenticate to this EKS cluster."
   value       = module.eks-cluster.config_map_aws_auth
 }
-
-# output "region" {
-#   description = "AWS region."
-#   value       = var.region
-# }
 
 output "node_groups" {
   description = "Outputs from node groups"
@@ -58,12 +53,11 @@ output "aws_s3_bucket_name" {
 */
 output "private_subnet_output" {
   description = "Outputs from VPC Module with private_subnets"
-  value = module.vpc.private_subnets
-}
+  value = module.vpc.aws_subnet.private
 
 output "public_subnets_output" {
   description = "Outputs from VPC Module with public_subnets"
-  value = module.vpc.public_subnets
+  value = module.vpc.aws_subnet.public
 }
 
 output "vpc_id_output" {
@@ -78,6 +72,7 @@ output "cluster_id" {
 /*
 output "aws_route53_zone_id" {
   description = "Outputs from aws_route53_zone_id"
-  value       = data.aws_route53_zone.selected.zone_id
+#  value       = data.aws_route53_zone.base_domain
+  value = aws_route53_record.eks_domain.zone_id
 }
 */
