@@ -35,7 +35,7 @@ module "eks-cluster" {
   version          = "12.1.0"
   cluster_name     = "${var.cluster_name}"
   cluster_version  = var.cluster_version
-  write_kubeconfig = false
+  write_kubeconfig = var.write_kubeconfig
 
   subnets = module.vpc.private_subnets
   vpc_id  = module.vpc.vpc_id
